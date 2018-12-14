@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class ReverseList {
 
@@ -32,28 +33,50 @@ public class ReverseList {
         public ListNode1(E value){
             this.value = value;
         }
+       public String toString(){
+           StringBuilder list = new StringBuilder("[");
+           while(next != null){
+               list.append(next.value).append(",");
+               next = next.next;
+           }
+           list.append("]");
+           return list.toString();
+       }
 
-
-    }
-
-     class ListNode<E>{
-        E value;
-        ListNode next;
-        public ListNode(E value){
-            this.value = value;
-        }
-
-        public String toString(){
-            StringBuilder list = new StringBuilder("[");
-            while(next != null){
-                list.append(next.value).append(",");
-                next = next.next;
+       public ListNode reverseList(ListNode node){
+            Stack<ListNode> stack = new Stack();
+            for(ListNode next = node.next;next != null ;next = next.next){
+                stack.push(next);
             }
-            list.append("]");
-            return list.toString();
-        }
+            ListNode listnew = null;
+           for(int i = 0 ; i<stack.size();i++){
+               listnew = stack.pop();
+               listnew = listnew.next;
+           }
+           return listnew;
+       }
+
+
     }
 
+     class ListNode<E> {
+         E value;
+         ListNode next;
 
+         public ListNode(E value) {
+             this.value = value;
+         }
+
+         public String toString() {
+             StringBuilder list = new StringBuilder("[");
+             while (next != null) {
+                 list.append(next.value).append(",");
+                 next = next.next;
+             }
+             list.append("]");
+             return list.toString();
+         }
+
+     }
 
 }
